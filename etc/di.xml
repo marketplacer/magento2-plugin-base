@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Marketplacer\Base\Api\CacheInvalidatorInterface" type="Marketplacer\Base\Model\CacheInvalidator"/>
+
+    <!-- default cache types to be invalidated -->
+    <type name="Marketplacer\Base\Model\CacheInvalidator">
+        <arguments>
+            <argument name="defaultTypesToInvalidate" xsi:type="array">
+                <item name="block_html" xsi:type="string">block_html</item>
+                <item name="full_page" xsi:type="string">full_page</item>
+            </argument>
+        </arguments>
+    </type>
+</config>
