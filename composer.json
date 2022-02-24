@@ -1,5 +1,5 @@
 {
-    "name": "marketplacer/magento2-plugin-base",
+    "name": "marketplacer1/magento2-plugin-base",
     "description": "Marketplacer Base module",
     "type": "magento2-module",
     "version": "2.0.0",
