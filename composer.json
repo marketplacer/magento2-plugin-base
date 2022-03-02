@@ -2,7 +2,6 @@
     "name": "marketplacer/magento2-plugin-base",
     "description": "Marketplacer Base module",
     "type": "magento2-module",
-    "version": "2.0.0",
     "license": "proprietary",
     "autoload": {
         "files": [
