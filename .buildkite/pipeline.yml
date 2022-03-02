@@ -10,3 +10,15 @@ steps:
       docker-compose#v3.7.0:
         config: "$DOCKER_COMPOSE_FILE"
         run: composer
+
+  - label: ":git: Lint Commits"
+    command: npx commitlint --from origin/HEAD --to HEAD --verbose
+    branches: "!main !dependabot/*"
+    timeout_in_minutes: 5
+    plugins:
+      improbable-eng/metahook:
+        post_checkout: git fetch origin main
+      docker-compose#v3.7.0:
+        config: "$DOCKER_COMPOSE_FILE"
+        dependencies: false
+        run: commitlint
