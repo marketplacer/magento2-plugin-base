@@ -1,0 +1,12 @@
+env:
+  DOCKER_COMPOSE_FILE: "docker-compose.yml"
+
+steps:
+  - label: ":composer: Composer Validate"
+    command: composer validate --strict
+    branches: "!main"
+    timeout_in_minutes: 5
+    plugins:
+      docker-compose#v3.7.0:
+        config: "$DOCKER_COMPOSE_FILE"
+        run: composer
