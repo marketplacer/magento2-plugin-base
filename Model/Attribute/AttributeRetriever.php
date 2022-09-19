@@ -39,7 +39,7 @@ class AttributeRetriever implements \Marketplacer\Base\Api\AttributeRetrieverInt
     ) {
         if (!$attributeCode) {
             throw new InvalidArgumentException(
-                __('You need to pass attribute code in %1 class using DI to use it.', self::class)
+                (string)__('You need to pass attribute code in %1 class using DI to use it.', self::class)
             );
         }
         $this->attributeCode = $attributeCode;

@@ -196,7 +196,7 @@ class AttributeOptionHandler
         if ($productOption->getValue()) {
             $productAttributeOptionManagement->update(
                 $attribute->getAttributeCode(),
-                $productOption->getValue(),
+                (int)$productOption->getValue(),
                 $productOption
             );
         } else {

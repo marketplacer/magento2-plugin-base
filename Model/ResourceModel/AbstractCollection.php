@@ -77,11 +77,10 @@ class AbstractCollection extends BaseAbstractCollection implements SearchResultI
      * @param null|string|array $condition
      * @return $this
      * @see self::_getConditionSql for $condition
-     *
      */
     public function addFieldToFilter($field, $condition = null)
     {
-        if (is_array($field) && in_array('store_id', $field) || $field == 'store_id') {
+        if ((is_array($field) && in_array('store_id', $field)) || $field === 'store_id') {
             return $this->addStoreIdToFilter($condition);
         }
         return parent::addFieldToFilter($field, $condition);
