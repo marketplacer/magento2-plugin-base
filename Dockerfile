@@ -4,7 +4,7 @@ FROM node:alpine as commitlint
 
 RUN apk add git
 
-RUN mkdir /app
+RUN mkdir /app && git config --global --add safe.directory /app
 
 RUN cd /app
 
