@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <preference for="Marketplacer\Base\Api\CacheInvalidatorInterface" type="Marketplacer\Base\Model\CacheInvalidator"/>
+    <preference for="Marketplacer\Base\Api\ModuleInfoInterface" type="Marketplacer\Base\Model\ModuleInfo"/>
 
     <!-- default cache types to be invalidated -->
     <type name="Marketplacer\Base\Model\CacheInvalidator">
@@ -9,6 +10,28 @@
                 <item name="block_html" xsi:type="string">block_html</item>
                 <item name="full_page" xsi:type="string">full_page</item>
             </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Marketplacer\Base\Model\ModuleInfo\Config\SchemaLocator" type="Magento\Framework\Config\SchemaLocator">
+        <arguments>
+            <argument name="realPath" xsi:type="string">urn:magento:module:Marketplacer_Base:etc/module_info.xsd</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Marketplacer\Base\Model\ModuleInfo\Config\Reader" type="Magento\Framework\Config\Reader\Filesystem">
+        <arguments>
+            <argument name="converter" xsi:type="object">Marketplacer\Base\Model\ModuleInfo\Config\Converter</argument>
+            <argument name="schemaLocator" xsi:type="object">Marketplacer\Base\Model\ModuleInfo\Config\SchemaLocator</argument>
+            <argument name="fileName" xsi:type="string">module_info.xml</argument>
+            <argument name="idAttributes" xsi:type="array">
+                <item name="/config/module" xsi:type="string">name</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Marketplacer\Base\Model\ModuleInfo\ModuleInfoConfig">
+        <arguments>
+            <argument name="cacheId" xsi:type="string">module_info_cache</argument>
+            <argument name="reader" xsi:type="object">Marketplacer\Base\Model\ModuleInfo\Config\Reader</argument>
         </arguments>
     </type>
 </config>

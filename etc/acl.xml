@@ -3,7 +3,9 @@
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
-                <resource id="Marketplacer_Base::marketplacer" title="Marketplacer" sortOrder="200"/>
+                <resource id="Marketplacer_Base::marketplacer" title="Marketplacer" sortOrder="200">
+                    <resource id="Marketplacer_Base::base_api" title="Base API managements" translate="title" sortOrder="10"/>
+                </resource>
                 <resource id="Magento_Backend::stores">
                     <resource id="Magento_Backend::stores_settings">
                         <resource id="Magento_Config::config">

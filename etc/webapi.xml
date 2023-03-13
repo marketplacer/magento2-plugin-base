@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <!-- Brand -->
+    <route url="/V1/module/list" method="GET">
+        <service class="Marketplacer\Base\Api\ModuleInfoInterface" method="getList"/>
+        <resources>
+            <resource ref="Marketplacer_Base::base_api"/>
+        </resources>
+    </route>
+</routes>
