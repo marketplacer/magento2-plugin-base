@@ -2,6 +2,8 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <preference for="Marketplacer\Base\Api\CacheInvalidatorInterface" type="Marketplacer\Base\Model\CacheInvalidator"/>
     <preference for="Marketplacer\Base\Api\ModuleInfoInterface" type="Marketplacer\Base\Model\ModuleInfo"/>
+    <preference for="Marketplacer\Base\Api\ServiceClientInterface" type="Marketplacer\Base\Api\ServiceClient"/>
+    <preference for="Marketplacer\Base\Api\ClientResolverInterface" type="Marketplacer\Base\Model\ClientResolver"/>
 
     <!-- default cache types to be invalidated -->
     <type name="Marketplacer\Base\Model\CacheInvalidator">
@@ -32,6 +34,14 @@
         <arguments>
             <argument name="cacheId" xsi:type="string">module_info_cache</argument>
             <argument name="reader" xsi:type="object">Marketplacer\Base\Model\ModuleInfo\Config\Reader</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Config\Model\Config\TypePool">
+        <arguments>
+            <argument name="sensitive" xsi:type="array">
+                <item name="marketplacer_base/base/api_key" xsi:type="string">1</item>
+            </argument>
         </arguments>
     </type>
 </config>
