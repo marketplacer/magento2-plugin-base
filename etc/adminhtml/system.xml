@@ -17,6 +17,12 @@
                     <label>API Key</label>
                     <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
                 </field>
+                <field id="http_login" translate="label" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>HTTP Basic Authentication login</label>
+                </field>
+                <field id="http_password" translate="label" type="obscure" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>HTTP Basic Authentication password</label>
+                </field>
             </group>
         </section>
     </system>
