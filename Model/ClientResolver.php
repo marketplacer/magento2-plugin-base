@@ -47,20 +47,45 @@ class ClientResolver implements ClientResolverInterface
     ): Client {
         if ($accessToken = $this->baseConfig->getToken()) {
             $middlewares[] = Middleware::mapRequest(function (RequestInterface $request) use ($accessToken) {
+                $header = '';
+                $credentials = base64_encode($this->baseConfig->getHttpLogin() .':' . $this->baseConfig->getHttpPassword());
+                $basicAuth = sprintf('Basic %s', $credentials);
+
+                if ($this->baseConfig->getHttpLogin() && $this->baseConfig->getHttpPassword() && $accessToken) {
+                    $header = $basicAuth;
+                }
+
+                if (!$this->baseConfig->getHttpLogin() || !$this->baseConfig->getHttpPassword() && $accessToken) {
+                    $header = 'Bearer ' . $accessToken;
+                }
+
                 return $request
-                    ->withHeader('Authorization', 'Bearer ' . $accessToken);
+                    ->withHeader('Authorization', $header);
             });
         }
 
         $this->addMiddlewaresToStack($middlewares);
 
+        $authenticationData = [$this->baseConfig->getHttpLogin(), $this->baseConfig->getHttpPassword()];
+
+        if (!$this->baseConfig->getHttpLogin() || !$this->baseConfig->getHttpPassword()) {
+            $authenticationData[2] = null;
+        }
+
+        $headerData = [
+            RequestOptions::HTTP_ERRORS => false,
+            'base_uri' => $hostname,
+            'handler' => $this->getStack(),
+            'auth' => $authenticationData,
+            'headers' => ['User-Agent' => $this->getUserAgent()],
+        ];
+
+        if ($this->baseConfig->getHttpLogin() && $this->baseConfig->getHttpPassword()) {
+            $headerData['marketplacer-api-key'] = $this->baseConfig->getToken();
+        }
+
         return $this->clientFactory->create(
-            [
-                RequestOptions::HTTP_ERRORS => false,
-                'base_uri' => $hostname,
-                'handler' => $this->getStack(),
-                'headers' => ['User-Agent' => $this->getUserAgent()],
-            ]
+            $headerData
         );
     }
 
