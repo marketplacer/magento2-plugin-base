@@ -99,7 +99,7 @@ class Image extends \Magento\Catalog\Helper\Image
      * @param string $key
      * @return string
      */
-    public function getOptionImage(DataObject $option = null, $key = self::OPTION_IMAGE_ID)
+    public function getOptionImage(?DataObject $option = null, $key = self::OPTION_IMAGE_ID)
     {
         if (null === $option) {
             $option = $this->getProduct();
