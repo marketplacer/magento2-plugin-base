@@ -57,8 +57,8 @@ class AbstractCollection extends BaseAbstractCollection implements SearchResultI
         LoggerInterface $logger,
         FetchStrategyInterface $fetchStrategy,
         ManagerInterface $eventManager,
-        AdapterInterface $connection = null,
-        AbstractDb $resource = null
+        ?AdapterInterface $connection = null,
+        ?AbstractDb $resource = null
     ) {
         parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $connection, $resource);
 
@@ -147,7 +147,7 @@ class AbstractCollection extends BaseAbstractCollection implements SearchResultI
      * @return BaseAbstractCollection
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function setSearchCriteria(SearchCriteriaInterface $searchCriteria = null)
+    public function setSearchCriteria(?SearchCriteriaInterface $searchCriteria = null)
     {
         $this->searchCriteria = $searchCriteria;
         return $this;
@@ -183,7 +183,7 @@ class AbstractCollection extends BaseAbstractCollection implements SearchResultI
      * @return BaseAbstractCollection
      * @throws Exception
      */
-    public function setItems(array $items = null)
+    public function setItems(?array $items = null)
     {
         if (!$items) {
             return $this;
