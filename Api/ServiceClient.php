@@ -57,7 +57,7 @@ class ServiceClient implements ServiceClientInterface
             ];
             $response = $client->request('POST', $path, $options);
 
-            $result = $this->serializer->unserialize($response->getBody()->getContents());
+            $result = $this->serializer->unserialize(stripslashes($response->getBody()->getContents()));
             $result['status'] = $response->getStatusCode();
 
             if ($response->getStatusCode() >= 400 || isset($result['errors'])) {
